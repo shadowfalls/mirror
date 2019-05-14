@@ -14,7 +14,7 @@ export default class ArticleSection {
         this.isQuoted      = data && typeof data.isQuoted === 'boolean' ? data.isQuoted : false;
         this.gist          = data && data.gist ? data.gist : '';
         this.isGist        = data && typeof data.isGist === 'boolean' ? data.isGist : false;
-        this.isMainHeading = data && typeof data.isMainHeading === 'boolean' ? data.isGist : false;
-        this.isSubHeading  = data && typeof data.isSubHeading === 'boolean' ? data.isGist : false;
+        this.isMainHeading = data && typeof data.isMainHeading === 'boolean' ? data.isMainHeading : false;
+        this.isSubHeading  = data && typeof data.isSubHeading === 'boolean' ? data.isSubHeading : false;
     }
 }
