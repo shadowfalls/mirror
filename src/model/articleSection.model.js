@@ -5,6 +5,7 @@ export default class ArticleSection {
     isGist = false;
     isMainHeading = false;
     isSubHeading = false;
+    isCodeSection = false;
     gist = '';
 
     constructor(data) {
@@ -16,5 +17,6 @@ export default class ArticleSection {
         this.isGist        = data && typeof data.isGist === 'boolean' ? data.isGist : false;
         this.isMainHeading = data && typeof data.isMainHeading === 'boolean' ? data.isMainHeading : false;
         this.isSubHeading  = data && typeof data.isSubHeading === 'boolean' ? data.isSubHeading : false;
+        this.isCodeSection = data && typeof data.isCodeSection === 'boolean' ? data.isCodeSection : false;
     }
 }

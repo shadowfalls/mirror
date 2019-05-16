@@ -12,7 +12,7 @@ export default class Article {
         if (!data)
             return;
         try {
-            data =JSON.parse(data);
+            data = JSON.parse(data);
         }catch(err) {
             console.error(err);
             return;

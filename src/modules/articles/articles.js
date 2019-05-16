@@ -2,6 +2,9 @@ import fs from 'fs';
 
 import constants from '../../core/constants';
 import Article from '../../model/article.model';
+import Utils from '../../core/utils';
+
+const utils = new Utils();
 
 export default class Articles {
 
@@ -28,25 +31,29 @@ export default class Articles {
         });
     }
 
-    updateArticle(data, callback) {
+    updateArticle(data, id, callback) {
 
-        const articleName = data.title.replace(/ /g, '_');
+        let blog;
+        try {
+            blog = JSON.stringify(data);
+        }catch(err) {            
+            callback(utils.error({message: 'Fails to parse JSON', err: err}));
+            return;
+        }
 
         // check if file with the given name already exists
-        fs.stat(`${constants.articlesPath}/${articleName}.json`, (err, stat) => {
+        fs.stat(`${constants.articlesPath}/${id}.json`, (err, stat) => {
             if (err == null) {
-                callback({
-                    error: true,
-                    message: 'Blog with same name already exists!'
-                });
-            } else if (err.code == 'ENOENT') {
-                fs.writeFile(`${constants.articlesPath}/${articleName}.json`, JSON.stringify(data), (err) => {
+                const temp = new Article(blog);
+                fs.writeFile(`${constants.articlesPath}/${id}.json`, JSON.stringify(temp), (err) => {
                     if (err) {
                         callback(err);
                         return;
                     }
                     callback({ error: false, message: 'Article successfully created' });
                 });
+            } else if (err.code == 'ENOENT') {
+                callback(utils.error({message: 'Blog not found!', err: err}));
             }
         });
     }

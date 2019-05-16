@@ -20,7 +20,6 @@ router.get('/api/get_article/:article_name', (req, res, next) => {
       res.status(500).send(art);
     else
       res.send(art);
-    next();
   });
 });
 
@@ -30,7 +29,6 @@ router.post('/api/create_article', (req, res, next) => {
       res.status(500).send(result);
     else
       res.send(result);
-    next();
   });
 });
 
@@ -40,7 +38,6 @@ router.put('/api/update_article', (req, res, next) => {
       res.status(500).send(result);
     else
       res.send(result);
-    next();
   });
 });
 
@@ -50,7 +47,6 @@ router.get('/api/get_categories', (req, res, next) => {
       res.status(500).send(result);
     else
       res.send(result);
-    next();
   });
 });
 
@@ -60,26 +56,16 @@ router.post('/api/get_blog_list', (req, res, next) => {
       res.status(500).send(result);
     else
       res.send(result);
-    next();
   });
 });
 
 router.put('/api/update_article/:article_name', (req, res, next) => {
 
-  fs.readFile(`src/api/articles/${req.params.article_name}.json`, 'utf8', (err, data) => {
-    if (err) {
-      res.send(err);
-      return err;
-    }
-    const art = new Article(data);
-    const tr = JSON.stringify(art)
-    fs.writeFile(`src/api/articles/${req.params.article_name}.json`, tr, (err) => {
-      if (err) {
-        res.send(err);
-        return err;
-      }
-      res.send({ error: false, message: 'Article successfully updated' });
-    });
+  manageArticles.updateArticle(req.body, req.params.article_name, (result) => {
+    if (result.error)
+      res.status(500).send(result);
+    else
+      res.send(result);
   });
 });
 
