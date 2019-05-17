@@ -1,7 +1,4 @@
 import express from 'express';
-import fs from 'fs';
-
-import Article from '../model/article.model';
 
 import Articles from './articles/articles';
 import Categories from './categories/categories';
@@ -32,8 +29,8 @@ router.post('/api/create_article', (req, res, next) => {
   });
 });
 
-router.put('/api/update_article', (req, res, next) => {
-  manageArticles.updateArticle(req.body, (result) => {
+router.put('/api/update_article/:id', (req, res, next) => {
+  manageArticles.updateArticle(req.body, req.params.id, (result) => {
     if (result.error)
       res.status(500).send(result);
     else
@@ -52,6 +49,24 @@ router.get('/api/get_categories', (req, res, next) => {
 
 router.post('/api/get_blog_list', (req, res, next) => {
   manageCategories.getBlogListByCat(req.body, (result) => {
+    if (result.error)
+      res.status(500).send(result);
+    else
+      res.send(result);
+  });
+});
+
+router.put('/api/update_cat_name', (req, res, next) => {
+  manageCategories.updateCategoryName(req.body.newName, req.body.id, (result) => {
+    if (result.error)
+      res.status(500).send(result);
+    else
+      res.send(result);
+  });
+});
+
+router.put('/api/create_category', (req, res, next) => {
+  manageCategories.createCategory(req.body.name, (result) => {
     if (result.error)
       res.status(500).send(result);
     else
