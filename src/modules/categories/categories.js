@@ -92,8 +92,10 @@ export default class Categories {
     createCategoryBlogList(catId, blogDetails, callback) {
         fs.writeFile(`${constants.categoriesPath}/${catId}.json`,
             JSON.stringify([{
-                blogId: blogDetails.id,
-                blogName: blogDetails.name
+                blogId: blogDetails.blogId,
+                blogName: blogDetails.name,
+                date: blogDetails.date,
+                readTimeMin: blogDetails.readTimeMin
             }])
             , (err) => {
                 if (err) {
@@ -123,8 +125,10 @@ export default class Categories {
                     }
                     if (temp) {
                         temp.push({
-                            blogId: blogDetails.id,
-                            blogName: blogDetails.name
+                            blogId: blogDetails.blogId,
+                            blogName: blogDetails.title,
+                            date: blogDetails.date,
+                            readTimeMin: blogDetails.readTimeMin
                         });
                         fs.writeFile(`${constants.categoriesPath}/${catId}.json`,
                             JSON.stringify(temp),
@@ -167,7 +171,7 @@ export default class Categories {
                         return;
                     }
                     try {
-                        callback({ error: false, message: 'Blog list fetched', data: JSON.parse(data) });
+                        callback({ error: false, message: 'Blog list fetched', data: utils.safeParse(data) });
                     } catch (err) {
                         callback(utils.error({ message: 'Blog list parse error', err: err }));
                     }
@@ -221,6 +225,7 @@ export default class Categories {
             catId = catId.toLocaleLowerCase();
         }
         fs.stat(`${constants.categoriesPath}/${constants.categoriesTypeJson}.json`, (err, stat) => {
+            // if category list file is present
             if (err == null) {
                 fs.readFile(`${constants.categoriesPath}/${constants.categoriesTypeJson}.json`, 'utf8', (err, data) => {
                     if (err) {
@@ -258,6 +263,7 @@ export default class Categories {
                         });
                 });
             } else if (err.code == 'ENOENT') {
+                // if category list file is not present
                 fs.writeFile(`${constants.categoriesPath}/${constants.categoriesTypeJson}.json`,
                     JSON.stringify({
                         catId: catId,
