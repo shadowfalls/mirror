@@ -90,8 +90,8 @@ export default class Articles {
                                     callback(resp);
                                     return;
                                 }
-                                this.categoryManager.updateCategoryBlogList(temp.categoryId, 
-                                    {id: id, name: temp.title}, (respo) => {
+                                temp.blogId = id;
+                                this.categoryManager.updateCategoryBlogList(temp.categoryId, temp, (respo) => {
                                     if (respo.error) {
                                         callback(respo);
                                         return;

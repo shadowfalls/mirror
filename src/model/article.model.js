@@ -3,6 +3,7 @@ import ArticleSection from './articleSection.model';
 export default class Article {
 
     title = '';
+    description = '';
     categoryId = '';
     content = [];
     date = new Date();
@@ -18,6 +19,7 @@ export default class Article {
             return;
         }
         this.title       = data.title ? data.title : '';
+        this.description = data.description ? data.description : '';
         this.categoryId  = data.categoryId ? data.categoryId : '';
         this.content     = data.content && data.content.length ? data.content.map(row => new ArticleSection(row)) : [];
         this.date        = data.date ? new Date(data.date) : new Date();
