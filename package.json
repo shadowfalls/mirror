@@ -1,29 +1,29 @@
 {
-  "name": "setup1",
+  "name": "mirror",
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon",
-    "server": "babel-node ./src/bin/www",
-    "server:prod": "node ./dist/bin/www",
-    "dev": "NODE_ENV=development npm-run-all server",
-    "clean": "rimraf dist",
-    "build": "babel ./src --out-dir dist",
-    "prod": "NODE_ENV=production npm-run-all clean build server:prod",
-    "run_prod": "npm run prod"
+    "start": "nodemon ./src/app.js",
+    "json": "node ./json_server/server.js",
+    "lint": "eslint --ignore-path .gitignore .",
+    "prep_json": "bash ./bin/remove.sh && node ./src/core/prepareJson.js",
+    "lint_fix": "eslint --fix --ignore-path .gitignore .",
+    "asset": "node serve_assets.js"
   },
   "dependencies": {
     "express": "~4.16.1",
-    "morgan": "~1.9.1",
-    "npm-run-all": "^4.1.5",
-    "rimraf": "^2.6.3"
+    "mongodb": "^3.5.9"
   },
   "devDependencies": {
-    "@babel/cli": "^7.4.4",
-    "@babel/core": "^7.4.4",
-    "@babel/node": "^7.2.2",
-    "@babel/plugin-proposal-class-properties": "^7.4.4",
-    "@babel/preset-env": "^7.4.4",
-    "nodemon": "^1.19.0"
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.2.0",
+    "eslint-config-airbnb": "^18.1.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.21.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.14.3",
+    "eslint-plugin-react-hooks": "^2.5.0",
+    "json-server": "^0.16.1",
+    "nodemon": "^2.0.4"
   }
 }
