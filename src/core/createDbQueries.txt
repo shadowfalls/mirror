@@ -1,0 +1,41 @@
+
+/**
+ * Need to run these queries in `mongo` console to create collections
+ *
+ */
+
+/**
+ * Pick the correct Database
+ * use <DATA_BASE_NAME>
+ */
+
+use CODE_BLOG;
+
+/**
+ * Create Category collection
+ *
+ * https://docs.mongodb.com/manual/reference/method/db.createCollection/
+ */
+
+db.createCollection('category');
+
+/**
+ * Add unique constraint for name
+ */
+
+db.category.createIndex({ 'name': 1 }, { unique: true })
+
+
+/**
+ * Create Article collection
+ *
+ * https://docs.mongodb.com/manual/reference/method/db.createCollection/
+ */
+
+db.createCollection('article');
+
+/**
+ * Add unique constraint for title
+ */
+
+db.article.createIndex({ 'title': 1 }, { unique: true })

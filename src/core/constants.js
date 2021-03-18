@@ -1,9 +1,12 @@
 const constants = {
-    articlesPath: 'src/api/articles',
-    categoriesPath: 'src/api/categories',
-    categoriesTypeJson: '_categorieTypes',
-    recentArticlesJson: '_recentArticlesJson',
-    recentArticlesSize: 8
+  /* mongodb://<host>:<port>/<database name> */
+  connectionUrl: 'mongodb://localhost:27017',
+  dbName: 'CODING_BLOG',
+  articlesPath: 'api/articles',
+  categoriesPath: 'api/categories',
+  categoriesTypeJson: '_categorieTypes',
+  recentArticlesJson: '_recentArticlesJson',
+  recentArticlesSize: 8,
 };
 
-export default constants;
+module.exports = constants;
