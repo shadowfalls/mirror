@@ -10,6 +10,8 @@ class Article {
     this.title = d.title;
     this.categoryId = d.categoryId;
     this.description = d.description;
+    this.coverImage = d.coverImage;
+    this.keyWords = d.keyWords;
     this.readTimeMin = d.readTimeMin;
     this.content = Array.isArray(d.content) ? d.content.map((content) => new Content(content))
       : [];
