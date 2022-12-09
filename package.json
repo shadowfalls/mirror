@@ -11,7 +11,7 @@
     "asset": "node serve_assets.js"
   },
   "dependencies": {
-    "express": "~4.16.1",
+    "express": "~4.17.3",
     "mongodb": "^3.5.9"
   },
   "devDependencies": {
